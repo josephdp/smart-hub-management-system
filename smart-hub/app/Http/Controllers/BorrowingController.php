@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Borrowing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PeminjamanNotification;
 
 class BorrowingController extends Controller
 {
@@ -24,9 +26,12 @@ class BorrowingController extends Controller
             'return_time' => now()
         ]);
 
+        // Perintah untuk memicu pengiriman email
+        Mail::to('admin@smarthub.com')->send(new PeminjamanNotification($borrowing));
+
         return response()->json([
             'status' => 'success',
-            'message' => 'Check-in berhasil diproses'
+            'message' => 'Check-in berhasil diproses dan notifikasi telah dikirim'
         ], 200);
     }
 
