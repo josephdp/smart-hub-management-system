@@ -18,7 +18,7 @@ Sistem ini dikembangkan sebagai bagian dari pemenuhan tugas Ujian Tengah Semeste
 
 ## 🛠️ Arsitektur & Teknologi
 
-* **Framework:** Laravel 11 (PHP 8.x)
+* **Framework:** Laravel 13 (PHP 8.x)
 * **Database:** MySQL / MariaDB (via XAMPP)
 * **API Testing:** Postman / Thunder Client
 * **Version Control:** Git (Menggunakan strategi *feature branching*)
