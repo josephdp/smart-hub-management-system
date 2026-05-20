@@ -38,5 +38,5 @@ Sistem ini dikembangkan sebagai bagian dari pemenuhan tugas Ujian Tengah Semeste
 
 1. **Clone Repositori**
    ```bash
-   git clone [https://github.com/username-anda/smart-hub-management-system.git](https://github.com/username-anda/smart-hub-management-system.git)
+   git clone https://github.com/josephdp/smart-hub-management-system.git
    cd smart-hub-management-system/smart-hub
