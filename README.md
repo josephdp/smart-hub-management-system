@@ -1,6 +1,6 @@
 # Smart-Hub Management System 🚀
 
-**Smart-Hub Management System** adalah sistem backend berbasis API yang dirancang untuk mengelola inventaris perangkat pintar dan jadwal peminjaman alat secara otomatis. Sistem ini dibangun menggunakan **Laravel 11** dan dioptimalkan untuk berintegrasi dengan perangkat eksternal seperti aplikasi tablet di lapangan untuk proses *check-in* (pengembalian) yang cepat dan efisien.
+**Smart-Hub Management System** adalah sistem backend berbasis API yang dirancang untuk mengelola inventaris perangkat pintar dan jadwal peminjaman alat secara otomatis. Sistem ini dibangun menggunakan **Laravel 13** dan dioptimalkan untuk berintegrasi dengan perangkat eksternal seperti aplikasi tablet di lapangan untuk proses *check-in* (pengembalian) yang cepat dan efisien.
 
 Sistem ini dikembangkan sebagai bagian dari pemenuhan tugas Ujian Tengah Semester (UTS) dengan menerapkan praktik pengodean terbaik, manajemen *database* relasional, serta kontrol versi menggunakan strategi *Git Branching*.
 
