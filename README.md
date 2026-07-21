@@ -1,42 +1,51 @@
 # Smart-Hub Management System 🚀
 
-**Smart-Hub Management System** adalah sistem backend berbasis API yang dirancang untuk mengelola inventaris perangkat pintar dan jadwal peminjaman alat secara otomatis. Sistem ini dibangun menggunakan **Laravel 13** dan dioptimalkan untuk berintegrasi dengan perangkat eksternal seperti aplikasi tablet di lapangan untuk proses *check-in* (pengembalian) yang cepat dan efisien.
+**Smart-Hub Management System** adalah sistem *Full-Stack* (Web Application & API Backend) yang dirancang untuk mengelola inventaris perangkat pintar dan jadwal peminjaman alat secara otomatis. Sistem ini dibangun menggunakan **Laravel 13** dan antarmuka reaktif **Vue.js (Inertia.js)**, serta dioptimalkan untuk berintegrasi dengan perangkat eksternal seperti aplikasi tablet di lapangan untuk proses *check-in* (pengembalian) yang cepat dan efisien.
 
-Sistem ini dikembangkan sebagai bagian dari pemenuhan tugas Ujian Tengah Semester (UTS) dengan menerapkan praktik pengodean terbaik, manajemen *database* relasional, serta kontrol versi menggunakan strategi *Git Branching*.
+Sistem ini dikembangkan dengan menerapkan praktik pengodean terbaik, pemisahan *port* (CORS), manajemen *database* relasional, serta kontrol versi menggunakan strategi *Git Branching*.
 
 ---
 
-## ✨ Fitur Utama
+## ✨ Fitur Utama (Core Development)
 
-* **RESTful API untuk Inventaris:** Menyediakan *endpoint* siap pakai berformat JSON untuk sinkronisasi data alat (`GET /api/equipments`).
-* **Sistem Check-In Otomatis:** Memproses pengembalian alat secara *real-time* via tablet lewat metode `PUT /api/check-in/{id}`.
-* **Notifikasi Email Otomatis:** Mengirimkan notifikasi email secara instan kepada Admin setiap kali ada pembaruan status peminjaman alat (dikonfigurasi via *Laravel Log Mailer* untuk kebutuhan pengujian).
-* **Database Terstruktur & Cascading:** Menggunakan Laravel Migration dengan relasi antar tabel (`users`, `equipments`, `borrowings`) yang aman menggunakan metode `cascadeOnDelete`.
-* **Penanganan Masalah Pluralisasi:** Konfigurasi khusus pada model Eloquent untuk menangani anomali bentuk jamak bahasa Inggris (*uncountable nouns*) pada tabel inventaris.
+* **Autentikasi Aman:** Integrasi halaman *Login* Web dengan API backend menggunakan otorisasi Token (*Bearer Token*) via Laravel Sanctum.
+* **Modul Manage Data Master:** Mengelola data inventaris utama dengan fitur *List* (Lihat), *Create* (Tambah), dan *Delete* (Hapus) peralatan.
+* **Modul Manage Transaction:** Dasbor operasional peminjaman dengan fitur *List*, *Create*, *Update* status, serta validasi terhadap data *check-in* peralatan yang diinput oleh *user*.
+* **Integrasi API (Inertia.js):** Integrasi *seamless* dengan API *backend* menggunakan metode pemanggilan *fetch* standar dalam ekosistem Laravel Inertia.js.
+* **Database Terstruktur & Cascading:** Menggunakan Laravel Migration dengan relasi antar tabel (`users`, `equipments`, `transactions`) yang aman menggunakan metode `cascadeOnDelete`.
 
 ---
 
 ## 🛠️ Arsitektur & Teknologi
 
-* **Framework:** Laravel 13 (PHP 8.x)
+* **Backend Framework:** Laravel 13 (PHP 8.x)
+* **Frontend Framework:** Vue.js 3, Inertia.js, Tailwind CSS (Breeze)
 * **Database:** MySQL / MariaDB (via XAMPP)
-* **API Testing:** Postman / Thunder Client
+* **API Authentication:** Laravel Sanctum
 * **Version Control:** Git (Menggunakan strategi *feature branching*)
 
 ---
 
 ## 🚦 Jalur API (API Endpoints)
 
-| Metode | Endpoint | Fungsi | Status Respons |
+| Metode | Endpoint | Fungsi | Keterangan |
 | :--- | :--- | :--- | :--- |
-| **GET** | `/api/equipments` | Mengambil seluruh daftar inventaris alat | `200 OK` (JSON) |
-| **PUT** | `/api/check-in/{id}` | Mengubah status peminjaman menjadi `checked_in` & memicu email | `200 OK` (JSON) |
+| **POST** | `/api/login` | Melakukan login dan *generate Bearer Token* | Akses Publik |
+| **GET** | `/api/equipments` | Mengambil seluruh daftar inventaris alat | `auth:sanctum` |
+| **POST** | `/api/equipments` | Menambah alat/inventaris baru ke master data | `auth:sanctum` |
+| **DELETE** | `/api/equipments/{id}` | Menghapus data alat dari database | `auth:sanctum` |
+| **GET** | `/api/transactions` | Mengambil riwayat daftar transaksi peminjaman | `auth:sanctum` |
+| **POST** | `/api/transactions` | Membuat catatan transaksi peminjaman baru | `auth:sanctum` |
+| **PUT** | `/api/transactions/{id}` | Memperbarui status transaksi | `auth:sanctum` |
+| **PUT** | `/api/check-in/{id}` | Validasi dan ubah status peminjaman menjadi `returned` | `auth:sanctum` |
 
 ---
 
 ## 💻 Cara Menjalankan Proyek di Lokal
 
-1. **Clone Repositori**
-   ```bash
-   git clone https://github.com/josephdp/smart-hub-management-system.git
-   cd smart-hub-management-system/smart-hub
+Karena aplikasi ini mengusung arsitektur terpisah, Anda harus menjalankan *Backend* dan *Frontend* di dua terminal yang berbeda.
+
+### 1. Clone Repositori
+```bash
+git clone [https://github.com/josephdp/smart-hub-management-system.git](https://github.com/josephdp/smart-hub-management-system.git)
+cd smart-hub-management-system
