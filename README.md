@@ -40,6 +40,16 @@ Sistem ini dikembangkan dengan menerapkan praktik pengodean terbaik, pemisahan *
 | **PUT** | `/api/check-in/{id}` | Validasi dan ubah status peminjaman menjadi `returned` | `auth:sanctum` |
 
 ---
+FLOW APLIKASI SMART-HUB MANAGEMENT SYSTEM
+
+1. Flow Autentikasi (Login):
+Pengguna memasukkan email dan password di halaman Login Frontend (Vue) -> Frontend mengirimkan request POST ke /api/login di Port 8000 -> Backend (Laravel) memvalidasi data dan menerbitkan Bearer Token (Sanctum) -> Frontend menerima respons sukses dan menyimpan token tersebut ke dalam localStorage browser.
+
+2. Flow Master Data (Inventaris):
+Pengguna mengakses halaman Master Data -> Frontend mengirimkan request GET/POST/DELETE ke /api/equipments dengan menyertakan Bearer Token di dalam header permintaan -> Backend memvalidasi token melalui middleware auth:sanctum, mengeksekusi perintah ke database, lalu mengembalikan data dalam format JSON -> Frontend menerima JSON dan merender tabel data secara dinamis di layar pengguna.
+
+3. Flow Transaksi & Check-In:
+Pengguna membuat transaksi baru atau mengubah status peminjaman di dasbor web -> Frontend mengirim payload data beserta Bearer Token ke endpoint /api/transactions atau /api/check-in/{id} -> Backend memvalidasi otorisasi dan memproses perubahan status di dalam database relasional -> Backend mengembalikan respons sukses -> UI di Frontend memunculkan notifikasi dan otomatis memuat ulang (reload) data transaksi terbaru.
 
 ## 💻 Cara Menjalankan Proyek di Lokal
 
